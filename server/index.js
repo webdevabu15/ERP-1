@@ -4,6 +4,7 @@ import studentRoutes from "./routes/studentRoutes.js";
 import attendanceRoutes from "./routes/attendanceRoutes.js";
 import path from "path";
 import morgan from "morgan";
+import cors from "cors";
 
 import dotenv from "dotenv";
 import connectDB from "./config/mongoDBConfig.js";
@@ -15,6 +16,7 @@ const app = express();
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/users", userRoutes);
