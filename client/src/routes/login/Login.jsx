@@ -1,9 +1,13 @@
-import {useState} from 'react'
-import {connect} from "react-redux";
+import {useLayoutEffect, useState} from 'react'
+import {connect, useSelector} from "react-redux";
 import { Button } from '../../utils'
 import { login } from '../../redux/actions/auth-action';
+import { useNavigate } from 'react-router-dom';
+import { validateToken } from '../../helpers';
 
 const Login = (props) => {
+  const navigate = useNavigate();
+  const userdata = useSelector(state => state.auth)
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -11,6 +15,12 @@ const Login = (props) => {
     e.preventDefault();
     props.login({email, password});
   }
+
+  useLayoutEffect(() => {
+    if (userdata.user && userdata.user.token && validateToken(userdata.user.token)) {
+      navigate("/admin");
+    }
+  }, [userdata]);
 
   return (
     <div className='auth-form-container'>

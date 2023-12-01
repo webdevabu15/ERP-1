@@ -1,10 +1,12 @@
 import { connect, useSelector } from "react-redux"
 import { Button } from '../../utils';
 import { register } from '../../redux/actions/auth-action';
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Register = (props) => {
-  // const data = useSelector(state => state.auth);
+  const navigate = useNavigate();
+  const userdata = useSelector(state => state.auth)
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -13,6 +15,13 @@ const Register = (props) => {
     e.preventDefault();
     props.register({name, email, password});
   }
+
+  useEffect(() => {
+    console.log(userdata)
+    if(userdata.user.token){
+      navigate("/admin")
+    }
+  }, [userdata])
 
   return (
     <div className='auth-form-container'>

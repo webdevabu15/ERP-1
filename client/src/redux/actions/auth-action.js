@@ -36,7 +36,7 @@ const auth_error = (message) => {
     }
 }
 
-const auth_logout = (message) => {
+export const auth_logout = (message) => {
     toast.success(message)
     return {
         type: AUTH_LOUGOUT,

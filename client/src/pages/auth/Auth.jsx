@@ -6,9 +6,7 @@ const Auth = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    
     navigate("/auth/login")
-
   }, []);
 
   return (

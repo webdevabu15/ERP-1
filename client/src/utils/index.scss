@@ -1,16 +1,7 @@
 .btn{
     background-color: darkcyan;
-    @if attr("data-appearence") == "success"{
-        background-color: darkcyan;
-    }
-    @else if attr("data-appearence") == "danger"{
-        background-color: red;
-    }
-    @else if attr("data-appearence") == "warning"{
-        background-color: gold;
-    }
     color: #fff;
-    padding: 15px 0;
+    padding: 15px 20px;
     border-radius: 5px;
     border: none;
     font-size: 18px;
@@ -30,4 +21,16 @@
     &:hover{
         opacity: .9;
     }
+}
+
+.btn.danger{
+    background-color: red;
+}
+
+.btn.success{
+    background-color: darkcyan;
+}
+
+.btn.warning{
+    background-color: gold;
 }
