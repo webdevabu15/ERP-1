@@ -3,11 +3,13 @@ import "./Sidebar.scss";
 import {Button} from '../../utils';
 import { connect } from "react-redux";
 import { auth_logout } from "../../redux/actions/auth-action";
-import { NavLink, useOutletContext } from "react-router-dom";
+import { NavLink, useOutletContext, Link, useLocation } from "react-router-dom";
 import sidebarstaticdata from "../../static/static.json";
 
 const Sidebar = (props) => {
-  const [profiledata, isloading] = useOutletContext();
+    const {pathname} = useLocation();
+
+    const [profiledata, isloading] = useOutletContext();
 
     const handleLogOut = () => {
         const isuseragreedtologout = window.confirm(
@@ -17,8 +19,10 @@ const Sidebar = (props) => {
           props.auth_logout("You logged out");
         }
       };
+
   return (
     <div className='sidebar'>
+        <Link to={pathname === "/admin" ? "/" : "/admin"}>ERP DASHBOARD</Link>
         <div className='sidebar__profile'>
             {profiledata ? (
             <div className='profile'>

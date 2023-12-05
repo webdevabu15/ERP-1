@@ -2,7 +2,11 @@ import React from 'react'
 
 const Attendance = () => {
   return (
-    <div>Attendance</div>
+    <>
+      <div className='admin__content-header'>
+        <h1>Attendance</h1>
+      </div>
+    </>
   )
 }
 

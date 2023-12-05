@@ -1,7 +1,7 @@
 import { useLayoutEffect } from "react";
 import Sidebar from "../../layout/sidebar/Sidebar";
 import "./Admin.scss";
-import { useNavigate } from "react-router-dom";
+import { Outlet, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const Admin = () => {
@@ -18,7 +18,7 @@ const Admin = () => {
     <div className="admin">
       <Sidebar />
       <div className="admin__content">
-       
+        <Outlet/>
       </div>
     </div>
   );

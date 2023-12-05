@@ -1,3 +1,48 @@
 .admin{
     display: flex;
 }
+
+.admin__content{
+    padding: 30px;
+    flex: 1;
+}
+
+.admin__content-header{
+    padding-bottom: 10px;
+    border-bottom: 2px solid lightgray;
+    display: flex;
+    justify-content: space-between;
+
+    h1{
+        font-weight: 600;
+        font-size: 30px;
+        line-height: 40px;
+    }
+}
+
+.form{
+    padding: 30px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    h2{
+        font-size: 30px;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+    input, select{
+        text-indent: 10px;
+        border: 1px solid gray;
+        height: 35px;
+        border-radius: 5px;
+        outline: none;
+    }
+
+    select{
+        text-transform: uppercase;
+    }
+
+    button{
+        margin-top: 30px;
+    }
+}
