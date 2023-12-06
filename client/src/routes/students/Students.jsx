@@ -21,6 +21,8 @@ const Students = (props) => {
   const [blockNo, setBlockNo] = useState("");
   const [status, setStatus] = useState("");
   const [studentId, setStudentId] = useState("");
+  const [search, setSearch] = useState("");
+  const [selectedStatus, setSelectedStatus] = useState("")
 
   useEffect(() => {
     if(students_data.length > 0){
@@ -109,6 +111,9 @@ const Students = (props) => {
     }
   }
 
+  console.log(selectedStatus)
+
+
   return (
     <>
       <div className="admin__content-header">
@@ -117,6 +122,17 @@ const Students = (props) => {
       </div>
       <div className="admin__content-body">
        <div className="table-wrapper">
+        <div className="table-search">
+          <input type="text" placeholder="Search student" value={search} onChange={(e) => setSearch(e.target.value)} />
+          <select value={selectedStatus} onChange={(e) => setSelectedStatus(e.target.value)}>
+            <option value="">SELECT STATUS</option>
+            {
+                ["hostel", "home", "rent"].map((item, index) => 
+                  <option key={index} value={item}>{item}</option>
+                )
+              }
+          </select>
+        </div>
        {
             !isloading && students_data.length > 0 ? 
               <table className="students-table">
@@ -132,7 +148,7 @@ const Students = (props) => {
                   </thead>
                   <tbody>
                     {
-                      students_data.map(student => (
+                      students_data.filter(student => student.name.indexOf(search) !== -1).filter(student => student.status.indexOf(selectedStatus) !== -1).map(student => (
                         <tr key={student._id}>
                             {
                               tableHeaderContent &&

@@ -3,7 +3,7 @@ import {
   deleteAttendanceByDays,
   enterAttendanceByRoomNo,
   getAttendance,
-  getAttendanceByRoomNo,
+  getAttendanceByRoomNo
 } from "../controllers/attendanceController.js";
 import { protect, admin } from "../middleware/authMiddleware.js";
 const router = express.Router();

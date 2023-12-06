@@ -1,12 +1,23 @@
 import asyncHandler from "express-async-handler";
 import Attendance from "../models/attendance.js";
 
+const getAllAttendance = asyncHandler(async (req, res) => {
+  const attendance = await Attendance.find({});
+  res.json(attendance);
+})
+
 const getAttendanceByRoomNo = asyncHandler(async (req, res) => {
-  const date = req.body.date || Date().toString().substring(0, 15);
-  const attendance = await Attendance.findOne({
-    roomNo: { $in: [req.body.roomNo] },
-    date: date,
-  });
+  let attendance;
+  const date = req.body.date
+  if(!date && !req.body.roomNo){
+    attendance = await Attendance.find({});
+  }
+  else{
+    attendance = await Attendance.findOne({
+      roomNo: { $in: [req.body.roomNo] },
+      date: date,
+    });
+  }
   if (attendance) {
     res.json(attendance);
   } else {
@@ -74,5 +85,5 @@ export {
   getAttendanceByRoomNo,
   enterAttendanceByRoomNo,
   getAttendance,
-  deleteAttendanceByDays,
+  deleteAttendanceByDays
 };
