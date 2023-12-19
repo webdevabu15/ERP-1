@@ -44,3 +44,17 @@ input[type="date"]{
     text-indent: 5px;
     padding-right: 10px;
 }
+
+.admin__content-students{
+    padding: 30px;
+    overflow: auto;
+    height: 600px;
+}
+
+.admin__content-students > div{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    text-align: left !important;
+    padding: 30px;
+}

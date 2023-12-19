@@ -5,14 +5,17 @@ import { loadStudents } from '../../redux/actions/student-actions';
 import { useSelector } from 'react-redux';
 import axios from "../../services/api";
 import "./Attendance.scss";
-
+import { useDispatch } from 'react-redux';
+import { fetchData } from '../../redux/actions/attendence-students';
+import { loadAttends } from "../../redux/actions/attendence-students"
 
 const Attendance = (props) => {
+ 
   const {students_data, isloading} = useSelector(state => state.student);
   const roomNo = useRef();
   const date = useRef();
   const [isModalOpen, setIsModalOpen] = useState(false)
-
+    
   const studentsData = new Map();
   students_data.forEach(student => {
     studentsData.set(student.name, {present: true})
@@ -59,7 +62,23 @@ const Attendance = (props) => {
       })
       .catch(error => console.log(error))
   }
- 
+
+  // const dispatch = useDispatch();
+  // const attend = useSelector(state => state.attend);
+  // const loading = useSelector(state => state.loading);
+  // const error = useSelector(state => state.error);
+// console.log(attend);
+
+  // useEffect(() => {
+  //   // Redux Thunk orqali asinxron amalni boshlash
+  //   dispatch(fetchData());
+  // }, [dispatch]);
+  const attendata = useSelector(state => state.attend)
+  const isLoading = useSelector(state => state.attend.isloading)
+  console.log();
+  useEffect(() => {
+    props.loadAttends()
+  },[])
   return (
     <>
       <div className='admin__content-header'>
@@ -67,8 +86,33 @@ const Attendance = (props) => {
         <Button text={"Create new attendance"} isloading={false} click={() => setIsModalOpen(true)}/>
       </div>
       <div className='admin__content-body'>
-        <h2>Attendance</h2>
-        
+       <div className="admin__content-students">
+       {
+       !isLoading && attendata.attend_st.map(student => {
+            return <table>
+             <tr>
+              <td>
+                <p>{student.createdAt}</p>
+              </td>
+             </tr>
+             <tr>
+               <td>
+                <p>{student.roomNo}</p>
+               </td>
+             </tr>
+             <tr>
+              <td><p>{student.date}</p></td>
+             </tr>
+              <tr>
+                <td><p>{student.details.classStart}</p></td>
+              </tr>
+             <tr>
+              <td><p>{student.details.classEnd}</p></td>
+             </tr>
+            </table>
+          })
+       }
+       </div>
       </div>
 
       <Modal setIsModalOpen={setIsModalOpen} isModalOpen={isModalOpen}>
@@ -99,8 +143,9 @@ const Attendance = (props) => {
           <Button text={"Save attendance"} isloading={false}/>
         </form>
       </Modal>
+
     </>
   )
 }
 
-export default connect (null, {loadStudents}) (Attendance)
+export default connect (null, {loadStudents, loadAttends}) (Attendance)
